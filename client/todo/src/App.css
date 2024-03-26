@@ -1,0 +1,164 @@
+/*------------ MAIN STYLING ------------*/
+
+body {
+  font-family: sans-serif;
+  padding: 5% 0;
+}
+
+h1 {
+  color: rgb(56, 56, 56);
+  padding-bottom: 5%;
+}
+
+h3 {
+  margin: 0;
+  color: rgb(56, 56, 56);
+}
+
+hr {
+  border: none;
+  border-bottom: 1px solid rgb(221, 221, 221);
+}
+
+.container {
+  padding: 2% 3%;
+}
+
+.card {
+  /* box-shadow: 0 0 3px 1px grey; */
+  padding: 5% 5% 10%;
+}
+
+/*------------ INPUT STYLING ------------*/
+
+form {
+  display: flex;
+  border: 1px solid grey;
+  border-radius: 3px;
+}
+
+label[for="add-task-input"] {
+  display: flex;
+  flex-grow: 1;
+}
+
+.add-task-input {
+  margin: 0 !important;
+  border: none !important;
+  padding: 0.8rem 0 0.8rem 3.5% !important;
+}
+
+input[type="text"] {
+  margin: 0 3%;
+  width: 100%;
+  padding: 0.8rem 0 0.8rem 2%;
+  border: 1px solid grey;
+  border-radius: 3px;
+}
+
+input::placeholder {
+  opacity: 0.6;
+}
+
+input:focus {
+  outline-color: rgb(32, 170, 156);
+}
+
+.filter-tasks {
+  padding: 2% 3.5% !important;
+  border: none !important;
+  width: 85% !important;
+}
+
+.filter-tasks:focus {
+  outline: none !important;
+}
+
+/*------------ TASKLIST STYLING ------------*/
+
+.tasks-container ul {
+  list-style: none;
+  padding: 0;
+}
+
+.tasks-heading-container {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgb(194, 193, 193);
+  padding: 0.3rem;
+  margin-top: 1.5rem;
+}
+
+label[for="filter"] {
+  flex-grow: 1;
+  width: 100% !important;
+}
+
+.task-item {
+  display: flex;
+  align-items: center;
+  position: relative;
+  background-color: #f4f4f4;
+  border: 1px solid rgb(212, 212, 212);
+  margin: 1% 0;
+  padding: 3% 4%;
+}
+
+.clear-icon {
+  position: absolute;
+  right: 5%;
+  font-size: 20px;
+  color: rgb(209, 83, 83);
+}
+
+.ticker {
+  margin-right: 2%;
+}
+
+/*------------ HEADINGS STYLING ------------*/
+
+.main-heading {
+  text-align: center;
+}
+
+/*------------ BUTTONS STYLING ------------*/
+
+.task-submit-button {
+  padding: 0.6rem 7%;
+  border: none;
+  background-color: rgb(32, 170, 156);
+  color: white;
+}
+
+.task-submit-button:focus,
+.clear-all-button:focus {
+  outline: none;
+}
+
+div .clear-btn {
+  display: flex;
+  justify-content: center;
+}
+
+.clear-all-button {
+  padding: 0.7rem 5.7%;
+  border: none;
+  border-radius: 3px;
+  background-color: rgb(212, 50, 50);
+  color: white;
+  width: 90%;
+}
+
+/*------------ RESPONSIVE STYLING ------------*/
+
+@media (min-width: 624px) {
+  body {
+    padding: 2% 20%;
+  }
+}
+
+@media (min-width: 1024px) {
+  body {
+    padding: 1% 25%;
+  }
+}
