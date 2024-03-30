@@ -1,4 +1,7 @@
 import "./App.css";
+import ClearTasks from "./components/ClearTasks";
+import TodoInput from "./components/TodoInput";
+import TodoTasks from "./components/TodoTasks";
 
 function App() {
   return (
@@ -6,43 +9,11 @@ function App() {
       <div className="container">
         <div className="card">
           <h1 className="main-heading">Todo App</h1>
-          <div className="form-container">
-            <form className="add-task-form">
-              <label for="add-task-input">
-                <input
-                  className="add-task-input"
-                  name="add-task-input"
-                  type="text"
-                  placeholder="Enter new task"
-                />
-              </label>
-              <input
-                className="add-submit-button"
-                value="Add-task"
-                type="submit"
-              />
-            </form>
-          </div>
+          <TodoInput />
           <hr />
-          <div className="tasks-container">
-            <div className="tasks-heading-container">
-              <h3 className="tasklist-heading">Search</h3>
-              <span className="divider"></span>
-              <label for="filter">
-                <input
-                  name="filter"
-                  className="filter-tasks"
-                  placeholder="type to filter"
-                  type="text"
-                />
-              </label>
-            </div>
-            <ul className="task-list"></ul>
-          </div>
+          <TodoTasks />
           <hr />
-          <div className="clear-btn">
-            <button className="clear-all-button">Clear Tasks</button>
-          </div>
+          <ClearTasks />
           <hr />
         </div>
       </div>

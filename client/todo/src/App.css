@@ -42,10 +42,20 @@ label[for="add-task-input"] {
   flex-grow: 1;
 }
 
+.form-container .add-task-input {
+  width: 63vh;
+}
+
 .add-task-input {
   margin: 0 !important;
   border: none !important;
   padding: 0.8rem 0 0.8rem 3.5% !important;
+}
+
+.add-submit-button {
+  margin-left: 30px;
+  border: none !important;
+  padding: 0 auto !important;
 }
 
 input[type="text"] {

@@ -1,10 +1,12 @@
 import express from "express";
+import cors from "cors";
 import TaskRouter from "./routes/taskRouter.js";
 import AuthRouter from "./routes/authRouter.js";
 import CommentRouter from "./routes/commentRouter.js";
 
 const app = express();
-const PORT = 3003;
+app.use(cors());
+const PORT = 5500;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

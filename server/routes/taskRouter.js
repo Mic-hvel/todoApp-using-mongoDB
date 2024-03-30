@@ -6,7 +6,7 @@ const router = express.Router();
 
 const prisma = new PrismaClient();
 
-router.get("/", verifyToken, (req, res) => {
+router.get("/", (req, res) => {
   res.status(200).json({ message: "Protected route accessed" });
 });
 
