@@ -2,6 +2,7 @@ import "./App.css";
 import ClearTasks from "./components/ClearTasks";
 import TodoInput from "./components/TodoInput";
 import TodoTasks from "./components/TodoTasks";
+import SignIn from "./pages/SignIn";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <hr />
         </div>
       </div>
+      <SignIn />
     </div>
   );
 }
