@@ -1,8 +1,15 @@
 /*------------ MAIN STYLING ------------*/
 
+* {
+  margin: 0;
+  border: 0;
+  box-sizing: border-box;
+}
+
 body {
   font-family: sans-serif;
   padding: 5% 0;
+  margin: 0 auto;
 }
 
 h1 {
@@ -23,7 +30,6 @@ hr {
 .container {
   padding: 2% 3%;
 }
-
 .card {
   /* box-shadow: 0 0 3px 1px grey; */
   padding: 5% 5% 10%;
@@ -43,7 +49,7 @@ label[for="add-task-input"] {
 }
 
 .form-container .add-task-input {
-  width: 63vh;
+  width: 70vh;
 }
 
 .add-task-input {
@@ -53,9 +59,9 @@ label[for="add-task-input"] {
 }
 
 .add-submit-button {
-  margin-left: 30px;
   border: none !important;
   padding: 0 auto !important;
+  width: 100%;
 }
 
 input[type="text"] {
@@ -112,6 +118,13 @@ label[for="filter"] {
   border: 1px solid rgb(212, 212, 212);
   margin: 1% 0;
   padding: 3% 4%;
+}
+
+.edit-icon {
+  position: absolute;
+  right: 10%;
+  font-size: 20px;
+  color: rgb(209, 83, 83);
 }
 
 .clear-icon {
@@ -222,15 +235,21 @@ div .clear-btn {
   margin-bottom: 40px;
 }
 /*------------ RESPONSIVE STYLING ------------*/
-
 @media (min-width: 624px) {
   body {
-    padding: 2% 20%;
+    padding: 2% 18%;
+  }
+
+  .form-container .add-task-input {
+    width: 50vh;
   }
 }
 
 @media (min-width: 1024px) {
   body {
-    padding: 1% 25%;
+  }
+
+  .form-container .add-task-input {
+    width: 70vh;
   }
 }

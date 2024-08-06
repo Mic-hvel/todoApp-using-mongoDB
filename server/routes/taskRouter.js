@@ -13,9 +13,7 @@ router.get("/", (req, res) => {
 router.post("/tasks", verifyToken, async (req, res) => {
   const { title, body, author } = req.body;
 
-  const userId = await req.id;
-
-  console.log(req.id);
+  const userId = await req.user.id;
 
   try {
     const task = await prisma.task.create({
@@ -24,12 +22,9 @@ router.post("/tasks", verifyToken, async (req, res) => {
         body,
         author: {
           connect: {
-            id: userId.user,
+            id: userId,
           },
         },
-      },
-      select: {
-        author: true,
       },
     });
 
@@ -40,12 +35,25 @@ router.post("/tasks", verifyToken, async (req, res) => {
   }
 });
 
+router.get("/tasks", verifyToken, async (req, res) => {
+  try {
+    const task = await prisma.task.findMany({
+      where: {
+        authorId: req.user.id,
+      },
+    });
+
+    res.send(task);
+  } catch (error) {
+    res.status(500).send({ error });
+  }
+});
+
 router.get("/tasks/:id", verifyToken, async (req, res) => {
   try {
     const task = await prisma.task.findUnique({
-      where: { id: req.params.id },
+      where: { id: req.params.id, authorId: req.user.id },
     });
-    console.log(task);
     res.send(task);
   } catch (error) {
     res.status(500).send({ error });
@@ -54,19 +62,19 @@ router.get("/tasks/:id", verifyToken, async (req, res) => {
 
 router.put("/tasks/:id", verifyToken, async (req, res) => {
   try {
-    const task = await prisma.task.upsert({
+    const updateTask = await prisma.task.update({
       where: {
-        where: { id: req.params.id },
+        id: req.params.id,
       },
-      create: {
+      data: {
         title,
         body,
-        comments,
       },
     });
-    await task.save();
-    res.send(task);
+    console.log("Successfully updated a task", updateTask);
+    res.json(updateTask);
   } catch (error) {
+    console.log("Attempt to update task failed");
     res.status(500).send({ error });
   }
 });
@@ -75,7 +83,7 @@ router.delete("/tasks/:id", async (req, res) => {
   try {
     const task = await prisma.task.delete({
       where: {
-        username: username,
+        id: req.params.id,
       },
     });
     if (!task) {

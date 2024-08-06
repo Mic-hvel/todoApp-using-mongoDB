@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import TaskRouter from "./routes/taskRouter.js";
 import AuthRouter from "./routes/authRouter.js";
+import UserRouter from "./routes/userRouter.js";
 import CommentRouter from "./routes/commentRouter.js";
 
 const app = express();
@@ -22,6 +23,7 @@ app.get("/", (req, res) => {
 
 app.use("/todo", TaskRouter);
 app.use("/auth", AuthRouter);
+app.use("/users", UserRouter);
 app.use("/comments", CommentRouter);
 
 app.listen(PORT, () => {

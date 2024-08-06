@@ -1,53 +1,64 @@
 import React, { useState } from "react";
 
 const TodoInput = () => {
-  const [todo, setTodo] = useState("");
+  const [todo, setTodo] = useState({
+    title: "",
+    body: "",
+  });
 
   const handleTodoInput = (e) => {
-    setTodo(e.target.value);
+    setTodo({ ...todo, [e.target.name]: e.target.value });
   };
 
-  const handleInputSubmit = async () => {
-    if (todo === "") {
+  const handleInputSubmit = async (e) => {
+    e.preventDefault();
+
+    const data = {
+      title: todo.title,
+      body: todo.body,
+    };
+
+    let headers = {};
+    const token = sessionStorage.getItem("token");
+    if (token) {
+      headers = {
+        "Content-Type": "application/json",
+        Authorization: `${token}`,
+      };
+    }
+
+    if (data.title === "" || data.body === "") {
       alert("Please enter a task");
     }
 
-    const response = await fetch("", {
+    const response = await fetch("http://localhost:5500/todo/tasks", {
       method: "POST",
-      mode: "cors",
-      cache: "no-cache",
-      credentials: "same-origin",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      redirect: "follow",
-      referrerPolicy: "no-referrer",
-      body: JSON.stringify({ todo }),
+      headers,
+      body: JSON.stringify(data),
     });
-    const result = response.json();
-    setTodo(result);
+    const result = await response.json();
+    console.log(result);
+    setTodo({ ...todo, [e.target.name]: e.target.value });
   };
 
   return (
     <div>
       <div className="form-container">
-        <form className="add-task-form" onSubmit={(e) => e.preventDefault()}>
+        <form className="add-task-form" onSubmit={handleInputSubmit}>
           <label>
             <input
               className="add-task-input"
-              name="add-task-input"
-              value={todo}
+              name="title"
               type="text"
+              value={todo.title || ""}
               placeholder="Enter new task"
               onChange={handleTodoInput}
             />
           </label>
-          <input
-            className="add-submit-button"
-            value="Add-task"
-            type="submit"
-            onClick={handleInputSubmit}
-          />
+
+          <button className="add-submit-button" value="Add-task" type="submit">
+            Add Task
+          </button>
         </form>
       </div>
     </div>

@@ -55,7 +55,6 @@ router.get("/comments/:id", verifyToken, async (req, res) => {
     const post = await prisma.comment.findUniqueOrThrow({
       where: { _id: req.params.id },
     });
-    console.log(post);
     res.send(post);
   } catch (error) {
     res.status(500).send({ error });

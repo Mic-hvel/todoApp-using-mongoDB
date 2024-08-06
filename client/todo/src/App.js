@@ -1,25 +1,23 @@
 import "./App.css";
-import ClearTasks from "./components/ClearTasks";
-import TodoInput from "./components/TodoInput";
-import TodoTasks from "./components/TodoTasks";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import PrivateRoutes from "./utils/PrivateRoutes";
 import SignIn from "./pages/SignIn";
+import Home from "./components/Home";
+import Task from "./pages/Task";
+import TaskList from "./components/TaskLists";
 
 function App() {
   return (
-    <div className="App">
-      <div className="container">
-        <div className="card">
-          <h1 className="main-heading">Todo App</h1>
-          <TodoInput />
-          <hr />
-          <TodoTasks />
-          <hr />
-          <ClearTasks />
-          <hr />
-        </div>
-      </div>
-      <SignIn />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route element={<SignIn />} path="/login" />
+        <Route element={<PrivateRoutes />}>
+          <Route element={<Home />} path="/" />
+          <Route exact element={<Task />} path="/tasks/:id" />
+          <Route element={<TaskList />} path="/tasks"></Route>
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 

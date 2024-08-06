@@ -17,7 +17,7 @@ model Task {
   id          String    @id @default(auto()) @map("_id") @db.ObjectId
   title       String?
   isCompleted Boolean   @default(false)
-  body        String
+  body        String?
   author      User      @relation(fields: [authorId], references: [id])
   authorId    String    @db.ObjectId
   comments    Comment[]

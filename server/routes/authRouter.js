@@ -43,7 +43,6 @@ router.post("/sign-up", async (req, res, next) => {
     console.log(user);
     res.status(201).json({ message: "User registered successfully" });
   } catch (error) {
-    console.log(error);
     res.status(500).json({ error: "Registration failed" });
   }
 });
@@ -72,7 +71,10 @@ router.post("/sign-in", async (req, res, next) => {
     if (!validPassword) {
       return next(errorHandler(400, "Invalid Password"));
     }
-    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET);
+    const token = jwt.sign(
+      { id: user.id, username: user.username },
+      process.env.JWT_SECRET
+    );
 
     res.status(200).json({ token });
   } catch (error) {
