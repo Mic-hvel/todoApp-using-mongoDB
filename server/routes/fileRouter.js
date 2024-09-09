@@ -12,9 +12,9 @@ const storage = multer.memoryStorage();
 
 const fileFilter = (req, file, cb) => {
   if (
-    file.mimetype.split === "text/plain" ||
-    file.mimetype.split === "application/msword" ||
-    file.mimetype.split ===
+    file.mimetype === "text/plain" ||
+    file.mimetype === "application/msword" ||
+    file.mimetype ===
       "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
   ) {
     cb(null, true);
@@ -29,24 +29,25 @@ const upload = multer({
   limits: { fileSize: 1000000000, files: 2 },
 });
 
-const multiUpload = upload.array("files", 2);
+const multiUpload = upload.array("file", 2);
 
 router.get("/", (req, res) => {
   res.status(200).json({ messaage: "File Upload route active" });
 });
 
 router.post("/upload", multiUpload, async (req, res) => {
-  const file = req.file;
+  const files = req.files;
   if (!req.files || req.files.length === 0) {
     return res.status(400).json({ message: "No files uploaded" });
   }
 
   try {
-    const result = await uploadFile(file);
+    //const result = await uploadFile(file);
+    const result = {};
     res.json({ status: "success", result });
   } catch (error) {
     console.error("There is being an error", error);
-    res.status(500).send(error);
+    res.status(500).send({"error": JSON.stringify(error)});
   }
 });
 

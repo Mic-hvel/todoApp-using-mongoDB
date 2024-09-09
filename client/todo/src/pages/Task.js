@@ -21,6 +21,7 @@ const Task = () => {
 
     const form = e.currentTarget;
     const formData = new FormData(form);
+    formData.append('file', files[0]);
 
     if (!files) {
       console.log("No files selected");
@@ -30,7 +31,7 @@ const Task = () => {
     // Appending selected files to formData
     Array.from(files).forEach((file, index) => {
       console.log("This is the file name", file);
-      formData.append(`file-${index}`, file);
+      //formData.append(`file-${index}`, file);
       // Object.assign(formData, { file });
     });
 
