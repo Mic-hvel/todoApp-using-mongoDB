@@ -32,6 +32,7 @@ model User {
   tasks    Task[]
   password String?
   comments Comment[]
+  files    files[]
 }
 
 model Comment {
@@ -41,4 +42,16 @@ model Comment {
   user     User   @relation(fields: [authorId], references: [id])
   authorId String @db.ObjectId
   postId   String @db.ObjectId
+}
+
+model files {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  author    User     @relation(fields: [authorId], references: [id])
+  authorId  String   @db.ObjectId
+  fileName  String[]
+  fileSize  Int      @unique
+  fileType  String?
+  fileUrlS3 String[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

@@ -47,11 +47,10 @@ const TaskList = () => {
               <input
                 className="ticker"
                 type="checkbox"
+                // checked={task.isCompleted}
                 onChange={() => dispatch(todoToggled(task.id))}
               />
-              <Link to={`tasks/${task.id}`} preventScrollReset={true}>
-                {task.title}
-              </Link>
+              <Link to={`tasks/${task.id}`}>{task.title}</Link>
               <AiFillEdit className="edit-icon" />
               <MdDeleteForever className="clear-icon" />
             </li>

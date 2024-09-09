@@ -39,7 +39,7 @@ const SignIn = () => {
       }
       if (res.ok) {
         dispatch(signInSuccess(data));
-        navigate("/");
+        navigate("/home");
         const accessToken = data.token;
         sessionStorage.setItem("token", accessToken);
       }

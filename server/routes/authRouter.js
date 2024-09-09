@@ -18,7 +18,6 @@ router.get("/user", (req, res) => {
 
 router.post("/sign-up", async (req, res, next) => {
   const { username, password, email } = req.body;
-  console.log({ body: req.body });
 
   if (
     !email ||
@@ -40,7 +39,7 @@ router.post("/sign-up", async (req, res, next) => {
         password: hashedPassword,
       },
     });
-    console.log(user);
+
     res.status(201).json({ message: "User registered successfully" });
   } catch (error) {
     res.status(500).json({ error: "Registration failed" });
@@ -49,7 +48,6 @@ router.post("/sign-up", async (req, res, next) => {
 
 router.post("/sign-in", async (req, res, next) => {
   const { username, password } = req.body;
-  console.log({ username, password });
 
   if (!username || !password || username === "" || password === "") {
     return next(errorHandler(400, "All fields are required"));
@@ -61,13 +59,11 @@ router.post("/sign-in", async (req, res, next) => {
         username,
       },
     });
-    console.log({ user });
 
     if (!user) {
       return next(errorHandler(404, "User not found"));
     }
     const validPassword = bcrypt.compare(password, user.password);
-    console.log(validPassword);
     if (!validPassword) {
       return next(errorHandler(400, "Invalid Password"));
     }

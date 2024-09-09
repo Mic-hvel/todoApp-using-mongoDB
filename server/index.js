@@ -4,6 +4,7 @@ import TaskRouter from "./routes/taskRouter.js";
 import AuthRouter from "./routes/authRouter.js";
 import UserRouter from "./routes/userRouter.js";
 import CommentRouter from "./routes/commentRouter.js";
+import fileRouter from "./routes/fileRouter.js";
 
 const app = express();
 app.use(cors());
@@ -25,6 +26,7 @@ app.use("/todo", TaskRouter);
 app.use("/auth", AuthRouter);
 app.use("/users", UserRouter);
 app.use("/comments", CommentRouter);
+app.use("/files", fileRouter);
 
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);

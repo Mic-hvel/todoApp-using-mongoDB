@@ -42,7 +42,6 @@ router.get("/user", verifyToken, async (req, res) => {
       },
     });
 
-    console.log("User data retrieved successfully", user);
     res.send(user);
   } catch (error) {
     console.error("Error retrieving user data:", error);

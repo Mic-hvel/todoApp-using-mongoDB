@@ -71,7 +71,7 @@ router.put("/tasks/:id", verifyToken, async (req, res) => {
         body,
       },
     });
-    console.log("Successfully updated a task", updateTask);
+
     res.json(updateTask);
   } catch (error) {
     console.log("Attempt to update task failed");

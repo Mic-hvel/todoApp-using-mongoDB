@@ -6,7 +6,7 @@ const router = express.Router();
 const prisma = new PrismaClient();
 
 router.get("/", (req, res) => {
-  res.status.json({ messaage: "Comment route active" });
+  res.status(200).json({ messaage: "Comment route active" });
 });
 
 router.get("/talk", verifyToken, (req, res) => {
