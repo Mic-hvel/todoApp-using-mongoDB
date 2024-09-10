@@ -11,8 +11,7 @@ const Task = () => {
 
   const handleFileChange = (e) => {
     if (e.target.files) {
-      setFiles(e.target.files); // Setting the FileList object
-      console.log("Files selected:", e.target.files);
+      setFiles(e.target.files);
     }
   };
 
@@ -29,9 +28,7 @@ const Task = () => {
 
     // Appending selected files to formData
     Array.from(files).forEach((file, index) => {
-      console.log("This is the file name", file);
-      formData.append(`file-${index}`, file);
-      // Object.assign(formData, { file });
+      formData.append("file", file[0]);
     });
 
     for (var pair of formData.entries()) {
@@ -53,11 +50,10 @@ const Task = () => {
         body: formData,
       });
 
-      console.log("This is the result", result);
       const data = await result.json();
-      console.log(data);
+      console.log("This is the data", data);
     } catch (error) {
-      console.log("Error uploading files", error);
+      console.error("Error uploading files", error);
     }
   };
 

@@ -15,22 +15,19 @@ const s3 = new AWS.S3({
 });
 
 export const uploadFile = async (files) => {
-  const s3 = new AWS.S3({
-    region,
-    accessKeyId,
-    secretAccessKey,
-  });
-
   const params = Object.values(files).map((file) => {
     return {
       Bucket: bucketName,
-      Key: `${file[0].name}`,
-      Body: file[0].buffer,
-      size: file[0].size,
+      Key: file.originalname,
+      Body: file.buffer,
+      size: file.size,
     };
   });
 
-  return await Promise.all(params?.map((param) => s3.upload(param).promise()));
+  const data = await Promise.all(
+    params?.map((param) => s3.upload(param).promise())
+  );
+  return data;
 };
 
 export const getFileStream = (fileKey) => {

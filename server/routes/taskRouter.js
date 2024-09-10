@@ -3,7 +3,6 @@ import { PrismaClient } from "@prisma/client";
 import { verifyToken } from "../utils/verifyUser.js";
 
 const router = express.Router();
-
 const prisma = new PrismaClient();
 
 router.get("/", (req, res) => {
