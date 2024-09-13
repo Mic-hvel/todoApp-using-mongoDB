@@ -8,11 +8,23 @@ const region = process.env.S3_REGION;
 const accessKeyId = process.env.AWS_ACCESS_KEY_ID;
 const secretAccessKey = process.env.AWS_SECRET_ACCESS_KEY;
 
-const s3 = new AWS.S3({
-  region,
-  accessKeyId,
-  secretAccessKey,
-});
+let s3;
+if (process.env.MINIO_URL) {
+  s3 = new AWS.S3({
+    region,
+    accessKeyId,
+    secretAccessKey,
+    endpoint: process.env.MINIO_URL,
+    s3ForcePathStyle: 'true', // needed with minio?
+    signatureVersion: 'v4'
+  });
+} else {
+  s3 = new AWS.S3({
+    region,
+    accessKeyId,
+    secretAccessKey,
+  });
+}
 
 export const uploadFile = async (files) => {
   const params = Object.values(files).map((file) => {

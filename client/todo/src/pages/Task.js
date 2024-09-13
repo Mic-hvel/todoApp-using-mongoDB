@@ -44,7 +44,7 @@ const Task = () => {
     }
 
     try {
-      const result = await fetch("http://localhost:5500/files/upload", {
+      const result = await fetch(`${process.env.REACT_ENV_BACKEND_URL}/files/upload`, {
         method: "POST",
         headers,
         body: formData,

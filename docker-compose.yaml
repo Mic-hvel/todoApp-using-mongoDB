@@ -1,8 +1,8 @@
 version: "3"
 services:
-  mongodb:
+  todo-database:
     image: mongo:latest
-    container_name: mongo
+    container_name: todo-database
     ports:
       - "27017:27017"
     volumes:
@@ -15,11 +15,13 @@ services:
     build: ./server
     container_name: backend
     ports:
-      - "4500:4500"
+      - "5500:5500"
     depends_on:
       - mongodb
+      - minio
     environment:
-      DATABASE_URL: "mongodb+srv://michvel:0O1vV5XArcZtYHz9@cluster0.cn9jvzg.mongodb.net/todoApp?authSource=admin"
+      DATABASE_URL: "mongodb://todo-database"
+      MINIO_URL: "minio:9000"
       JWT_SECRET: "michvel"
     volumes:
       - ./backend:/usr/src/app
@@ -32,6 +34,8 @@ services:
       - "3000:3000"
     depends_on:
       - backend
+    environment:
+      - REACT_ENV_BACKEND_URL="http://backend:5500"
     volumes:
       - ./frontend:/src/app
 
@@ -41,7 +45,7 @@ services:
     ports:
       - "9000:9000"
     environment:
-      MINIO_ROOT_USER_KEY: "IA5DE4VSFWWLIHKNX2"
+      MINIO_ROOT_USER: "IA5DE4VSFWWLIHKNX2"
       MINIO_ROOT_PASSWORD: "U6peb5aw4brPoueKAV3C0/ESQwejb28dGESN3qYg"
       MINIO_DEFAULT_BUCKETS: "firsts3trial"
       MINIO_REGION: "eu-north-1"
