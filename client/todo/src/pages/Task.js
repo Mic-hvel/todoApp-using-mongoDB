@@ -9,9 +9,12 @@ const Task = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
 
+  const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
   const handleFileChange = (e) => {
     if (e.target.files) {
-      setFiles(e.target.files);
+      setFiles(e.target.files); // Setting the FileList object
+      console.log("Files selected:", e.target.files);
     }
   };
 
@@ -28,7 +31,9 @@ const Task = () => {
 
     // Appending selected files to formData
     Array.from(files).forEach((file, index) => {
-      formData.append("file", file[0]);
+      console.log("This is the file name", file);
+      formData.append(`file-${index}`, file);
+      // Object.assign(formData, { file });
     });
 
     for (var pair of formData.entries()) {
@@ -44,16 +49,17 @@ const Task = () => {
     }
 
     try {
-      const result = await fetch("http://localhost:5500/files/upload", {
+      const result = await fetch(`${backendUrl}/auth/sign-in`, {
         method: "POST",
         headers,
         body: formData,
       });
 
+      console.log("This is the result", result);
       const data = await result.json();
-      console.log("This is the data", data);
+      console.log(data);
     } catch (error) {
-      console.error("Error uploading files", error);
+      console.log("Error uploading files", JSON.stringify(error));
     }
   };
 

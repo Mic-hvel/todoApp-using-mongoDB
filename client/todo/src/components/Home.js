@@ -6,6 +6,8 @@ import TodoTasks from "./TodoTasks";
 const Home = () => {
   const [userName, setUserName] = useState(null);
 
+  const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
   useEffect(() => {
     const fetchName = async () => {
       let headers = {};
@@ -14,7 +16,7 @@ const Home = () => {
         headers = { Authorization: `${token}` };
       }
       try {
-        const userDetails = await fetch("http://localhost:5500/users/user", {
+        const userDetails = await fetch(`${backendUrl}/users/user`, {
           method: "GET",
           headers,
         });
@@ -25,7 +27,7 @@ const Home = () => {
       }
     };
     fetchName();
-  }, []);
+  }, [backendUrl]);
 
   return (
     <div className="App">

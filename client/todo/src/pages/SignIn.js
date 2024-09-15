@@ -14,6 +14,8 @@ const SignIn = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value.trim() });
   };
@@ -26,7 +28,7 @@ const SignIn = () => {
 
     try {
       dispatch(signInStart());
-      const res = await fetch("http://localhost:5500/auth/sign-in", {
+      const res = await fetch(`${backendUrl}/auth/sign-in`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

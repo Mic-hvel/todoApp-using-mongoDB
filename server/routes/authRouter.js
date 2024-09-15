@@ -39,7 +39,7 @@ router.post("/sign-up", async (req, res, next) => {
         password: hashedPassword,
       },
     });
-
+    await user.save();
     res.status(201).json({ message: "User registered successfully" });
   } catch (error) {
     res.status(500).json({ error: "Registration failed" });
@@ -63,12 +63,12 @@ router.post("/sign-in", async (req, res, next) => {
     if (!user) {
       return next(errorHandler(404, "User not found"));
     }
-    const validPassword = bcrypt.compare(password, user.password);
+    const validPassword = await bcrypt.compare(password, user.password);
     if (!validPassword) {
       return next(errorHandler(400, "Invalid Password"));
     }
     const token = jwt.sign(
-      { id: user.id, username: user.username },
+      { id: user.id, username: user.username, password: user.password },
       process.env.JWT_SECRET
     );
 

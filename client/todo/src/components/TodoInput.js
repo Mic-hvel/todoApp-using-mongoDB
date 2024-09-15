@@ -6,6 +6,8 @@ const TodoInput = () => {
     body: "",
   });
 
+  const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
   const handleTodoInput = (e) => {
     setTodo({ ...todo, [e.target.name]: e.target.value });
   };
@@ -31,7 +33,7 @@ const TodoInput = () => {
       alert("Please enter a task");
     }
 
-    const response = await fetch("http://localhost:5500/todo/tasks", {
+    const response = await fetch(`${backendUrl}/todo/tasks`, {
       method: "POST",
       headers,
       body: JSON.stringify(data),
